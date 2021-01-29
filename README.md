@@ -72,10 +72,10 @@ val configuration = FaceCaptureConfiguration(scanning_region, ImageQuality.MEDIU
 
 ```
 
-#### Image Quality
+#### Image Quality
 This is the image quality of the cropped image after it has been compressed and converted to JPEG. It can be either `ImageQuality.LOW` or `ImageQuality.MEDIUM` or `ImageQuality.HIGH`
 
-#### Scanning Area
+#### Scanning Area
 The scanning area is a `Rect` that represent the region in which the face can only be detected. If the face is outside of this region it will not be considered a valid face. A default will be applied for this.
 
 
