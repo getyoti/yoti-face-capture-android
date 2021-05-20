@@ -98,9 +98,18 @@ val faceCapture = findViewById<FaceCapture>(R.id.faceCapture)
 
 
 ### 4. Start the camera
+There are two ways to start the camera:
+
 ```
 faceCapture.startCamera(this, ::onCameraState)
 ```
+
+Or you could also do:
+```
+faceCapture.cameraState.observe(this, ::onCameraState)
+faceCaputure.startCamera(this)
+```
+
 
 #### Camera States
 
@@ -123,6 +132,7 @@ Start the detection and listen for incoming `FaceCaptureResult`
 ```
 faceCapture.startAnalysing(configuration, ::onFaceCaptureResult)
 ```
+This can be called straight after startCamera(), no need to wait for `CameraReady`
 
 #### Output Information
 
@@ -157,3 +167,4 @@ Optional errors (depending on the configuration passed):
 faceCapture.stopAnalysing()
 faceCapture.stopCamera()
 ```
+This is only required if it is part of your camera flow. Not required in response of lifecycle changes.
