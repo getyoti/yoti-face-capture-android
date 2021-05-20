@@ -11,11 +11,11 @@ This library leverage [Google ML Kit](https://firebase.google.com/docs/ml-kit/de
 
 In your `gradle.properties` add one of the following dependency
 ```
-implementation 'com.yoti.mobile.android:face-capture-bundled:1.0.0'
+implementation 'com.yoti.mobile.android:face-capture-bundled:2.3.0'
 ```
 
 ```
-implementation 'com.yoti.mobile.android:face-capture-unbundled:1.0.0'
+implementation 'com.yoti.mobile.android:face-capture-unbundled:2.3.0'
 ```
 
 #### Bundled VS Unbundled
@@ -68,7 +68,7 @@ Add the `FaceCapture` View to your layout
 
 ```
 val scanning_region = Rect(20, 200, 700, 800)
-val configuration = FaceCaptureConfiguration(scanning_region, ImageQuality.MEDIUM)
+val configuration = FaceCaptureConfiguration(scanning_region, ImageQuality.MEDIUM, requireValidAngle = true, requireEyesOpen = true, requiredStableFrames = 3)
 
 ```
 
@@ -78,6 +78,18 @@ This is the image quality of the cropped image after it has been compressed and 
 #### Scanning Area
 The scanning area is a `Rect` that represent the region in which the face can only be detected. If the face is outside of this region it will not be considered a valid face. A default will be applied for this.
 
+### Require Valid Angle
+This boolean if true, will require the picture to be taken with a tilt angle no bigger than 30 degrees.
+When this requirement is not met `FaceNotStraight` error is returned.
+
+### Require Eye Open
+This boolean if true it will require the eyes to be opened.
+When this requirement is not met `EyesClosed` error is returned.
+
+### Required Stable Frames
+This integer will require "n" number of frames to be as similar as possible in terms of width/hight and x/y position.
+The purpose of this is to avoid capturing blurry images.
+When this requirement is not met `FaceNotStable` error is returned.
 
 ### 3. Retreive your view
 ```
@@ -92,7 +104,7 @@ faceCapture.startCamera(this, ::onCameraState)
 
 #### Camera States
 
-There are a few states that can be returned to allow the integrator to know what the current state of the Face Capture is. these are:
+There are a few states that can be returned to allow the integrator to know what the current state of the Face Capture is. These are:
 - CameraReady - The Face Capture has connected to the camera and the preview is available, but no analyzing is happening
 - CameraStopped - The camera has stopped and no analyzing is happening.
 - Analyzing - The camera is ready and the Face Capture is analyzing frames to detect faces.
@@ -134,6 +146,11 @@ The error states and validation states are in a specific order. For example, the
 - FaceTooSmall
 - FaceTooBig
 - FaceNotCentered
+
+Optional errors (depending on the configuration passed):
+- FaceNotStraight
+- EyesClosed
+- FaceNotStable
 
 ### 6. Stop the library
 ```
