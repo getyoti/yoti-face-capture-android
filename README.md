@@ -11,11 +11,11 @@ This library leverage [Google ML Kit](https://firebase.google.com/docs/ml-kit/de
 
 In your `gradle.properties` add one of the following dependency
 ```
-implementation 'com.yoti.mobile.android:face-capture-bundled:2.3.0'
+implementation 'com.yoti.mobile.android:face-capture-bundled:2.7.0'
 ```
 
 ```
-implementation 'com.yoti.mobile.android:face-capture-unbundled:2.3.0'
+implementation 'com.yoti.mobile.android:face-capture-unbundled:2.7.0'
 ```
 
 #### Bundled VS Unbundled
@@ -68,7 +68,7 @@ Add the `FaceCapture` View to your layout
 
 ```
 val scanning_region = Rect(20, 200, 700, 800)
-val configuration = FaceCaptureConfiguration(scanning_region, ImageQuality.MEDIUM, requireValidAngle = true, requireEyesOpen = true, requiredStableFrames = 3)
+val configuration = FaceCaptureConfiguration(scanning_region, ImageQuality.MEDIUM, requireValidAngle = true, requireEyesOpen = true, requireBrightEnvironment = true, requiredStableFrames = 3)
 
 ```
 
@@ -85,6 +85,10 @@ When this requirement is not met `FaceNotStraight` error is returned.
 ### Require Eye Open
 This boolean if true it will require the eyes to be opened.
 When this requirement is not met `EyesClosed` error is returned.
+
+### Require Bright Environment
+If true it will require the environment luminosity to be above a pre-determined threshold.
+When this requirement is not met `EnvironmentTooDark` error is returned.
 
 ### Required Stable Frames
 This integer will require "n" number of frames to be as similar as possible in terms of width/hight and x/y position.
@@ -156,6 +160,7 @@ The error states and validation states are in a specific order. For example, the
 - FaceTooSmall
 - FaceTooBig
 - FaceNotCentered
+- EnvironmentTooDark
 
 Optional errors (depending on the configuration passed):
 - FaceNotStraight
