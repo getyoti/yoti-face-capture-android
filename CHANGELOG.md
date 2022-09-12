@@ -1,4 +1,12 @@
 # ChangeLog
+## Version 4.0.0
+BREAKING CHANGE: New FaceCaptureConfiguration requirements
+
+The configuration has been updated and expects a `faceCenter (PointF)` representing the expected center of the captured face.
+This parameter is a percentage value (x, y). E.g.: (0,0) - top left; (0.5, 0.5) - center of the screen; (1,1) - bottom right; 
+
+Please, check [README.md](https://github.com/getyoti/yoti-face-capture-android/blob/main/README.md) for more details.
+
 ## Version 3.0.0
 
 BREAKING CHANGE: Low light detection

@@ -11,11 +11,11 @@ This library leverage [Google ML Kit](https://firebase.google.com/docs/ml-kit/de
 
 In your `gradle.properties` add one of the following dependency
 ```
-implementation 'com.yoti.mobile.android:face-capture-bundled:3.0.0'
+implementation 'com.yoti.mobile.android:face-capture-bundled:4.0.0'
 ```
 
 ```
-implementation 'com.yoti.mobile.android:face-capture-unbundled:3.0.0'
+implementation 'com.yoti.mobile.android:face-capture-unbundled:4.0.0'
 ```
 
 #### Bundled VS Unbundled
@@ -67,16 +67,18 @@ Add the `FaceCapture` View to your layout
 ### 2. Create your configuration
 
 ```
-val scanning_region = Rect(20, 200, 700, 800)
-val configuration = FaceCaptureConfiguration(scanning_region, ImageQuality.MEDIUM, requireValidAngle = true, requireEyesOpen = true, requireBrightEnvironment = true, requiredStableFrames = 3)
+val faceCenter = PointF(0.5F, 0.5F)
+val configuration = FaceCaptureConfiguration(faceCenter, ImageQuality.MEDIUM, requireValidAngle = true, requireEyesOpen = true, requireBrightEnvironment = true, requiredStableFrames = 3)
 
 ```
 
+#### Face center
+The face center is a `PointF` representing the expected position of the center of the captured face.
+If the actual face center is not near this point it will not be considered a valid face.
+This parameter is a percentage value (x, y). E.g.: (0,0) - top left; (0.5, 0.5) - center of the screen; (1,1) - bottom right;
+
 #### Image Quality
 This is the image quality of the cropped image after it has been compressed and converted to JPEG. It can be either `ImageQuality.LOW` or `ImageQuality.MEDIUM` or `ImageQuality.HIGH`
-
-#### Scanning Area
-The scanning area is a `Rect` that represent the region in which the face can only be detected. If the face is outside of this region it will not be considered a valid face. A default will be applied for this.
 
 ### Require Valid Angle
 This boolean if true, will require the picture to be taken with a tilt angle no bigger than 30 degrees.
