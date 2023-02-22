@@ -22,9 +22,9 @@ implementation 'com.yoti.mobile.android:face-capture-unbundled:4.0.0'
 
 We offer two options to add this library to your app, bundled and unbundled.
 
-The bundled version embeds a 16Mb AI model for face detection.
+The bundled version embeds a 16Mb AI model for face detection with about 23.1Mb total SDK size.
 
-The unbundled version will manage the download of the AI model via Google Play Services the first time you start using the AI model. Additionally you can add the following metadata to your `manifest.xml` to get the model downloaded as soon as the app is installed.
+The unbundled version which has an estimated SDK size of 2.4Mb, will manage the download of the AI model via Google Play Services the first time you start using the AI model. Additionally you can add the following metadata to your `manifest.xml` to get the model downloaded as soon as the app is installed.
 ```
 <application ...>
   ...
