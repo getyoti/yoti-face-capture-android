@@ -68,7 +68,16 @@ Add the `FaceCapture` View to your layout
 
 ```
 val faceCenter = PointF(0.5F, 0.5F)
-val configuration = FaceCaptureConfiguration(faceCenter, ImageQuality.MEDIUM, requireValidAngle = true, requireEyesOpen = true, requireBrightEnvironment = true, requiredStableFrames = 3)
+val configuration = FaceCaptureConfiguration(
+                        faceCenter,
+                        ImageQuality.MEDIUM,
+                        requireValidAngle = true,
+                        requireEyesOpen = true,
+                        requireBrightEnvironment = true,
+                        requiredStableFrames = 3,
+                        provideLandmarks = true,
+                        provideSmileScore = true
+                    )
 
 ```
 
@@ -96,6 +105,12 @@ When this requirement is not met `EnvironmentTooDark` error is returned.
 This integer will require "n" number of frames to be as similar as possible in terms of width/hight and x/y position.
 The purpose of this is to avoid capturing blurry images.
 When this requirement is not met `FaceNotStable` error is returned.
+
+### Provide Landmarks
+If set to true, SDK will return facial landmark points for both original and cropped images on  valid face. These set of points are nullable
+
+### Provide Smile Score
+If set to true, SDK will return smile score on valid face. These score is a nullable value
 
 ### 3. Retreive your view
 ```
@@ -150,6 +165,9 @@ Result of the face capture containing the following:
       - Cropped Image - Byte array representation of a compressed JPEG image based on the configured image quality
       - The bounding box of the face inside the cropped image
       - The bounding box of the face inside the original image
+      - Facial landmark points for the original image
+      - Facial landmark points for the cropped image
+      - Smile score between 0.0 (unlikely smiling) and 1.0 (more likely smiling)
 
 If the cropping of the face did not meet the requirements then the Invalid Face will be returned. This will not contain any cropped image.
 
