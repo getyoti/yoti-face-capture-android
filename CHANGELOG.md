@@ -1,4 +1,11 @@
 # ChangeLog
+## Version 4.1.0
+CHANGE: New FaceCaptureConfiguration requirements
+
+New configurable properties `provideLandmarks` and `provideSmileScore` have been added to the SDK entry point.
+If these parameters are set to `true` (by default `false`), the SDK will return facial landmarks points for original and the cropped image and smile score (both values are nullable).
+Please check [README.md](https://github.com/getyoti/yoti-face-capture-android/blob/main/README.md) for more details.
+
 ## Version 4.0.0
 BREAKING CHANGE: New FaceCaptureConfiguration requirements
 
