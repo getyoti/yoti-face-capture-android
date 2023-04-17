@@ -1,4 +1,11 @@
 # ChangeLog
+## Version 4.1.2
+Fix: face capture view was not render in Android Studio preview.
+
+
+## Version 4.1.1
+Fix: Face capture module will return `AnalysisError` if libraries for image treatment are not found.
+
 ## Version 4.1.0
 CHANGE: New FaceCaptureConfiguration requirements
 
