@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">FCM Demo</string>
+
+    <!-- Main -->
+    <string name="yoti_fcm_demo_button_start">Start</string>
+    <string name="yoti_fcm_demo_button_auto">Automatic Capture</string>
+    <string name="yoti_fcm_demo_button_manual">Manual Capture</string>
+    <string name="yoti_fcm_demo_button_debug">Debug Capture</string>
+    <string name="yoti_fcm_demo_config_debug_mode">Debug Mode</string>
+    <string name="yoti_fcm_demo_config_manual_capture_mode">Manual capture</string>
+    <string name="yoti_fcm_demo_config_angle">Require Valid Angle</string>
+    <string name="yoti_fcm_demo_config_open">Require eyes open</string>
+    <string name="yoti_fcm_demo_config_stability">Require stable face</string>
+    <string name="yoti_fcm_demo_config_luminosity">Require bright environment</string>
+    <string name="yoti_fcm_demo_config_require_landmark">Require landmarks</string>
+    <string name="yoti_fcm_demo_config_require_smile_score">Require Smile Score</string>
+    <string name="yoti_fcm_demo_config_use_back_camera">Use back camera</string>
+    <string name="yoti_fcm_demo_button_capture">Capture</string>
+    <string-array name="yoti_fcm_demo_config_image_quality_array">
+        <item>High Quality</item>
+        <item>Default Quality</item>
+        <item>Low Quality</item>
+    </string-array>
+
+    <!-- Automatic capture -->
+    <string name="yoti_fcm_demo_capture_manual_button">Capture</string>
+
+    <!-- Permissions -->
+    <string name="yoti_fcm_demo_camera_error_permissions">No permissions granted</string>
+    
+    <!-- Camera errors -->
+    <string name="yoti_fcm_demo_camera_error_illegal_state">Illegal state</string>
+    <string name="yoti_fcm_demo_camera_error_unable_to_resolve">Camera error</string>
+    <string name="yoti_fcm_demo_camera_error_unknown">Error</string>
+    
+
+
+    <!-- Results -->
+    <string name="yoti_fcm_demo_result_valid_face">Valid face</string>
+    <string name="yoti_fcm_demo_result_error_analysis">Analysis Error</string>
+    <string name="yoti_fcm_demo_result_error_no_face_detected">Face not found</string>
+    <string name="yoti_fcm_demo_result_error_multiple_faces">Multiple faces</string>
+    <string name="yoti_fcm_demo_result_error_too_big">Face too big</string>
+    <string name="yoti_fcm_demo_result_error_too_small">Face too small</string>
+    <string name="yoti_fcm_demo_result_error_not_centered">Face not centered</string>
+    <string name="yoti_fcm_demo_result_error_bad_angle">Bad angle</string>
+    <string name="yoti_fcm_demo_result_error_eyes_closed">Eyes closed</string>
+    <string name="yoti_fcm_demo_result_error_not_stable">Face not stable</string>
+    <string name="yoti_fcm_demo_result_error_too_dark">Too dark environment</string>
+
+</resources>
