@@ -24,7 +24,7 @@ We offer two options to add this library to your app, bundled and unbundled.
 
 The bundled version embeds a 16Mb AI model for face detection with about 23.1Mb total SDK size.
 
-The unbundled version which has an estimated SDK size of 2.4Mb, will manage the download of the AI model via Google Play Services the first time you start using the AI model. It is recommened to add the following metadata to your `manifest.xml` to get the model downloaded as soon as the app is installed.
+The unbundled version which has an estimated SDK size of 2.4Mb, will manage the download of the AI model via Google Play Services the first time you start using the AI model. It is recommended to add the following metadata to your `manifest.xml` to get the model downloaded as soon as the app is installed.
 ```
 <application ...>
   ...
@@ -122,7 +122,7 @@ When this requirement is not met `FaceNotStable` error is returned.
 If set to true, SDK will return facial landmark points for both original and cropped images on a valid face. These set of points are nullable.
 
 ### Provide Smile Score
-If set to true, SDK will return smile score on a valid face. These score is a nullable value.
+If set to true, SDK will return smile score on a valid face. This score is a nullable value.
 
 ### 3. Retreive your view
 ```
