@@ -2,7 +2,7 @@
 
 yoti-face-capture-android provides a simplified way of capturing a face. It performs face detection from the front facing or back camera, analyses those frames and produces an optimised cropped image of the captured face.
 
-This library leverage on [Google ML Kit](https://firebase.google.com/docs/ml-kit/detect-faces) to perform the face detection.
+This library leverages on [Google ML Kit](https://firebase.google.com/docs/ml-kit/detect-faces) to perform face detection.
 
 ## Requirements
 - Android 21+
@@ -82,16 +82,16 @@ val configuration = FaceCaptureConfiguration(
 ```
 
 #### Face center
-The face center is a `PointF` representing the expected position of the face center inside the `FaceCapture` view. In the samples below, it is represented by the intersection of the red and blue lines in the sample images.
+The face center is a `PointF` representing the expected position of the centre of the user's face inside the `FaceCapture` view. In the samples below, it is represented by the intersection of the red and blue lines in the sample images.
 If the actual face center is not near this point it will not be considered a valid face.
 
-- In this sample we set as faceCenter a point which has to match with where the face silhouette is inside the `FaceCapture` view. This is the place where the user face will be. In this case, the faceCenter is set to `PointF(.5F, .45F)`, which means, a 45% of the vertical axis and 50% of the horizontal one. 
+- In this sample we set as faceCenter a point which has to match with where the face silhouette is inside the `FaceCapture` view. This is the place where the user's face will be. In this case, the faceCenter is set to `PointF(.5F, .45F)`, which means, a 50% of the horizontal axis and 45% of the vertical one.
 
 <p align="center">
 <img width="30%" src="https://github.com/getyoti/yoti-face-capture-android/assets/33830959/f5979597-2fc5-4dd1-9533-20c2b24bc8b2">
 </p>
 
-- In this other sample, we have a face silhouette which is closer to the top of the `FaceCapture` view, so we should move the vertical axis point upper, so in this case the FaceCenter configuration is set to `PointF(.5F, .35F)`:
+- In this other sample, we have a face silhouette which is closer to the top of the `FaceCapture` view, so we should move the vertical axis point towards the upper part, so in this case the FaceCenter configuration is set to `PointF(.5F, .35F)`:
 
 <p align="center">
 <img width="30%" src="https://github.com/getyoti/yoti-face-capture-android/assets/33830959/1bd0cd68-41aa-40c1-8e1a-2c33110d153c">
