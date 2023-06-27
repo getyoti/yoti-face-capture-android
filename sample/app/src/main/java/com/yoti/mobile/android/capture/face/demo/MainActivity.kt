@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.StrictMode
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -12,7 +11,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.yoti.mobile.android.capture.face.demo.config.FACE_CAPTURE_ACTIVITY_CONFIGURATION_EXTRA
+import com.yoti.mobile.android.capture.face.demo.config.FaceCaptureActivityConfiguration
 import com.yoti.mobile.android.capture.face.demo.databinding.ActivityMainBinding
+import com.yoti.mobile.android.capture.face.demo.debug.DebugFaceCaptureActivity
 import com.yoti.mobile.android.capture.face.ui.models.face.ImageQuality
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -30,10 +32,21 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             ActivityCompat.requestPermissions(this@MainActivity, REQUIRED_PERMISSIONS, 1)
         }
 
-        binding.startFaceCapture.setOnClickListener {
-            startActivity(Intent(this@MainActivity, FaceCaptureActivity::class.java).apply {
-                putExtra(FACE_CAPTURE_ACTIVITY_CONFIGURATION_EXTRA, getFaceCaptureActivityConfiguration())
-            })
+        with(binding) {
+            debugMode.setOnCheckedChangeListener { _, isChecked ->
+                manualCaptureMode.isEnabled = !isChecked
+                manualCaptureMode.isChecked = !isChecked
+            }
+
+            startFaceCapture.setOnClickListener {
+                val activity = if (debugMode.isChecked) DebugFaceCaptureActivity::class.java else FaceCaptureActivity::class.java
+                startActivity(Intent(this@MainActivity, activity).apply {
+                    putExtra(
+                            FACE_CAPTURE_ACTIVITY_CONFIGURATION_EXTRA,
+                            getFaceCaptureActivityConfiguration()
+                    )
+                })
+            }
         }
 
         populateImageQualitySpinner()
@@ -42,7 +55,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private fun getFaceCaptureActivityConfiguration(): FaceCaptureActivityConfiguration = with(binding) {
             FaceCaptureActivityConfiguration(
                     isBackCamera = backCamera.isChecked,
-                    isDebugMode = debugMode.isChecked,
                     imageQuality = imageQuality ?: ImageQuality.default,
                     isManualCapture = manualCaptureMode.isChecked,
                     requireValidAngle = validAngle.isChecked,

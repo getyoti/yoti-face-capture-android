@@ -3,6 +3,7 @@
 
     <!-- Main -->
     <string name="yoti_fcm_demo_button_start">Start</string>
+    <string name="yoti_fcm_demo_button_start_debug_mode">Debug Mode</string>
     <string name="yoti_fcm_demo_button_auto">Automatic Capture</string>
     <string name="yoti_fcm_demo_button_manual">Manual Capture</string>
     <string name="yoti_fcm_demo_button_debug">Debug Capture</string>
@@ -32,8 +33,6 @@
     <string name="yoti_fcm_demo_camera_error_illegal_state">Illegal state</string>
     <string name="yoti_fcm_demo_camera_error_unable_to_resolve">Camera error</string>
     <string name="yoti_fcm_demo_camera_error_unknown">Error</string>
-    
-
 
     <!-- Results -->
     <string name="yoti_fcm_demo_result_valid_face">Valid face</string>

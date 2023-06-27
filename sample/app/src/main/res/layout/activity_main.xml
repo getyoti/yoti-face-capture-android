@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/start_face_capture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:text="@string/yoti_fcm_demo_button_start"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="40dp" />
-
     <Spinner
         android:id="@+id/quality"
         android:layout_width="wrap_content"
@@ -25,27 +13,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/start_face_capture"/>
-
-    <CheckBox
-        android:id="@+id/manual_capture_mode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:text="@string/yoti_fcm_demo_config_manual_capture_mode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quality" />
-
-    <CheckBox
-        android:id="@+id/debug_mode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:text="@string/yoti_fcm_demo_config_debug_mode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manual_capture_mode" />
+        app:layout_constraintBottom_toTopOf="@id/valid_angle"/>
 
     <CheckBox
         android:id="@+id/valid_angle"
@@ -55,7 +23,7 @@
         android:text="@string/yoti_fcm_demo_config_angle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/debug_mode" />
+        app:layout_constraintBottom_toTopOf="@+id/eyes_open" />
 
     <CheckBox
         android:id="@+id/eyes_open"
@@ -64,7 +32,7 @@
         android:text="@string/yoti_fcm_demo_config_open"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/valid_angle" />
+        app:layout_constraintBottom_toTopOf="@+id/stability" />
 
     <CheckBox
         android:id="@+id/stability"
@@ -73,7 +41,7 @@
         android:text="@string/yoti_fcm_demo_config_stability"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eyes_open" />
+        app:layout_constraintBottom_toTopOf="@+id/luminosity" />
 
     <CheckBox
         android:id="@+id/luminosity"
@@ -83,7 +51,7 @@
         android:text="@string/yoti_fcm_demo_config_luminosity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stability" />
+        app:layout_constraintBottom_toTopOf="@+id/landmark" />
 
     <CheckBox
         android:id="@+id/landmark"
@@ -93,7 +61,7 @@
         android:text="@string/yoti_fcm_demo_config_require_landmark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/luminosity" />
+        app:layout_constraintBottom_toTopOf="@+id/smile_score" />
 
     <CheckBox
         android:id="@+id/smile_score"
@@ -103,7 +71,7 @@
         android:text="@string/yoti_fcm_demo_config_require_smile_score"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/landmark" />
+        app:layout_constraintBottom_toTopOf="@id/back_camera"/>
 
     <CheckBox
         android:id="@+id/back_camera"
@@ -112,6 +80,37 @@
         android:text="@string/yoti_fcm_demo_config_use_back_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/smile_score" />
+        app:layout_constraintBottom_toTopOf="@id/manual_capture_mode"
+        android:layout_marginBottom="60dp"/>
+
+    <CheckBox
+        android:id="@+id/manual_capture_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="@string/yoti_fcm_demo_config_manual_capture_mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/debug_mode" />
+
+    <CheckBox
+        android:id="@+id/debug_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="@string/yoti_fcm_demo_config_debug_mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/start_face_capture" />
+
+    <Button
+        android:id="@+id/start_face_capture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yoti_fcm_demo_button_start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="40dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
