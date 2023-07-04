@@ -82,7 +82,7 @@ val configuration = FaceCaptureConfiguration(
 ```
 
 #### Face center
-The face center is a `PointF` representing the expected position of the centre of the user's face inside the `FaceCapture` view. In the samples below, it is represented by the intersection of the red and blue lines in the sample images.
+The face center is a `PointF` representing the expected position of the center of the user's face inside the image captured. In the samples below, it is represented by the intersection of the red and blue lines in the sample images.
 If the actual face center is not near this point it will not be considered a valid face.
 
 - In this sample we set as faceCenter a point which has to match with where the face silhouette is inside the `FaceCapture` view. This is the place where the user's face will be. In this case, the faceCenter is set to `PointF(.5F, .45F)`, which means, a 50% of the horizontal axis and 45% of the vertical one.
