@@ -195,6 +195,6 @@ faceCapture.stopCamera()
 This is only required if it is part of your camera flow. Not required in response of lifecycle changes.
 
 ### Support
-If you have any other questions please do not hesitate to contact [clientsupport@yoti.com](clientsupport@yoti.com)
+If you have any other questions please do not hesitate to contact us here: https://support.yoti.com
 Once we have answered your question we may contact you again to discuss Yoti products and services. If you'd prefer us not to do this, please let us know when you e-mail.
 
