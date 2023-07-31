@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".debug.DebugFaceCaptureActivity">
+    tools:context=".automatic.AutomaticFaceCaptureActivity">
 
     <com.yoti.mobile.android.capture.face.ui.FaceCapture
         android:id="@+id/face_capture_view"
@@ -40,15 +40,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/mask_border" />
 
-    <com.yoti.mobile.android.capture.face.demo.debug.Overlay
-        android:id="@+id/debug_mode_overlay"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="1dp"
@@ -69,5 +60,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_text"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.72" />
+
+    <ImageView
+        android:id="@+id/capture_result"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_bottom_text"
+        android:layout_margin="16dp"
+        android:scaleType="fitEnd"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

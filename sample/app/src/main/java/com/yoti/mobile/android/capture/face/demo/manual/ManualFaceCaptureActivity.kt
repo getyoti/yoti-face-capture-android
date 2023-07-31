@@ -1,13 +1,13 @@
-package com.yoti.mobile.android.capture.face.demo.debug
+package com.yoti.mobile.android.capture.face.demo.manual
 
-import android.graphics.Color
-import android.graphics.Rect
 import android.os.Bundle
-import android.util.Size
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
+import androidx.lifecycle.lifecycleScope
 import com.yoti.mobile.android.capture.face.demo.R.string
-import com.yoti.mobile.android.capture.face.demo.databinding.ActivityDebugFaceCaptureBinding
+import com.yoti.mobile.android.capture.face.demo.databinding.ActivityManualFaceCaptureBinding
+import com.yoti.mobile.android.capture.face.demo.util.ByteArrayToBitmapConverter
 import com.yoti.mobile.android.capture.face.demo.util.cameraConfiguration
 import com.yoti.mobile.android.capture.face.demo.util.faceCaptureConfiguration
 import com.yoti.mobile.android.capture.face.ui.models.camera.CameraError
@@ -31,17 +31,23 @@ import com.yoti.mobile.android.capture.face.ui.models.face.FaceCaptureResult
 import com.yoti.mobile.android.capture.face.ui.models.face.FaceCaptureState.InvalidFace
 import com.yoti.mobile.android.capture.face.ui.models.face.FaceCaptureState.ValidFace
 import com.yoti.mobile.android.commons.image.ImageBuffer
-import kotlin.math.roundToInt
+import kotlinx.coroutines.launch
 
 
-class DebugFaceCaptureActivity : AppCompatActivity() {
+class ManualFaceCaptureActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDebugFaceCaptureBinding
+    private lateinit var binding: ActivityManualFaceCaptureBinding
+
+    private var isManualCaptureButtonClicked: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDebugFaceCaptureBinding.inflate(layoutInflater)
+        binding = ActivityManualFaceCaptureBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.manualCaptureButton.setOnClickListener {
+            isManualCaptureButtonClicked = true
+        }
     }
 
     override fun onResume() {
@@ -55,6 +61,50 @@ class DebugFaceCaptureActivity : AppCompatActivity() {
         stopAnalyzing()
         clearState()
         super.onPause()
+    }
+
+    private fun onFaceCaptureResult(result: FaceCaptureResult) {
+        when (val state = result.state) {
+            is InvalidFace -> handleInvalidFace(state.cause)
+            is ValidFace -> handleValidFace(state)
+        }
+    }
+
+    private fun handleValidFace(result: ValidFace) {
+        logState(string.yoti_fcm_demo_result_valid_face)
+
+        binding.manualCaptureButton.isInvisible = false
+        if (isManualCaptureButtonClicked) {
+            isManualCaptureButtonClicked = false
+            setValidImageAsResult(result.croppedImage)
+        }
+    }
+
+    private fun handleInvalidFace(cause: FaceCaptureInvalid) {
+        binding.manualCaptureButton.isInvisible = true
+        isManualCaptureButtonClicked = false
+        val detectionState = when (cause) {
+            is AnalysisError -> string.yoti_fcm_demo_result_error_analysis
+            is NoFaceDetected -> string.yoti_fcm_demo_result_error_no_face_detected
+            is MultipleFacesDetected -> string.yoti_fcm_demo_result_error_multiple_faces
+            is FaceTooBig -> string.yoti_fcm_demo_result_error_too_big
+            is FaceTooSmall -> string.yoti_fcm_demo_result_error_too_small
+            is FaceNotCentered -> string.yoti_fcm_demo_result_error_not_centered
+            is FaceNotStraight -> string.yoti_fcm_demo_result_error_bad_angle
+            is EyesClosed -> string.yoti_fcm_demo_result_error_eyes_closed
+            is FaceNotStable -> string.yoti_fcm_demo_result_error_not_stable
+            is EnvironmentTooDark -> string.yoti_fcm_demo_result_error_too_dark
+        }
+        logState(detectionState)
+    }
+
+    private fun setValidImageAsResult(image: ByteArray) {
+        lifecycleScope.launch {
+            binding.captureResult.setImageBitmap(ByteArrayToBitmapConverter().convert(image))
+        }
+        binding.manualCaptureButton.isInvisible = true
+        stopAnalyzing()
+        clearState()
     }
 
     private fun startCamera() {
@@ -72,16 +122,15 @@ class DebugFaceCaptureActivity : AppCompatActivity() {
     }
 
     private fun clearState() {
+        isManualCaptureButtonClicked = false
         binding.userFeedback.text = ""
-        clearOverlay()
     }
 
     private fun onCameraState(state: CameraState) {
         when (state) {
             is CameraInitializationError -> logState(handleCameraInitError(state.cause))
             is MissingPermissions -> logState(string.yoti_fcm_demo_camera_error_permissions)
-            else -> {
-            }
+            else -> {}
         }
     }
 
@@ -90,80 +139,5 @@ class DebugFaceCaptureActivity : AppCompatActivity() {
         UnableToResolveCamera -> string.yoti_fcm_demo_camera_error_unable_to_resolve
         else -> string.yoti_fcm_demo_camera_error_unknown
     }
-
-    private fun onFaceCaptureResult(result: FaceCaptureResult) {
-        when (val state = result.state) {
-            is InvalidFace -> handleInvalidFace(state.cause)
-            is ValidFace -> result.originalImage?.let {  handleValidFace(state, it) }
-        }
-    }
-
-    private fun handleValidFace(result: ValidFace, analysedImage: ImageBuffer) {
-        logState(string.yoti_fcm_demo_result_valid_face)
-        updateFaceOutline(
-                result.faceBoundingBox,
-                result.croppedFaceBoundingBox,
-                Size(analysedImage.width, analysedImage.height)
-        )
-    }
-
-    private fun handleInvalidFace(cause: FaceCaptureInvalid) {
-        val detectionState = when (cause) {
-            is AnalysisError -> string.yoti_fcm_demo_result_error_analysis
-            is NoFaceDetected -> string.yoti_fcm_demo_result_error_no_face_detected
-            is MultipleFacesDetected -> string.yoti_fcm_demo_result_error_multiple_faces
-            is FaceTooBig -> string.yoti_fcm_demo_result_error_too_big
-            is FaceTooSmall -> string.yoti_fcm_demo_result_error_too_small
-            is FaceNotCentered -> string.yoti_fcm_demo_result_error_not_centered
-            is FaceNotStraight -> string.yoti_fcm_demo_result_error_bad_angle
-            is EyesClosed -> string.yoti_fcm_demo_result_error_eyes_closed
-            is FaceNotStable -> string.yoti_fcm_demo_result_error_not_stable
-            is EnvironmentTooDark -> string.yoti_fcm_demo_result_error_too_dark
-        }
-        logState(detectionState)
-        clearOverlay()
-    }
-
-    private fun updateFaceOutline(
-            boundingBox: Rect,
-            croppedBoundingBox: Rect,
-            resolution: Size,
-    ) {
-        clearOverlay()
-        drawFaceOutline(boundingBox, resolution)
-        drawCroppedFaceOutline(croppedBoundingBox, resolution)
-    }
-
-    private fun drawFaceCenterPoint() {
-        val centerX =
-                (cameraConfiguration.targetResolution.width * faceCaptureConfiguration.faceCenter.x).roundToInt()
-        val centerY =
-                (cameraConfiguration.targetResolution.height * faceCaptureConfiguration.faceCenter.y).roundToInt()
-        val outlineThickness = 2
-        val outline = Rect(
-                centerX - outlineThickness,
-                centerY - outlineThickness,
-                centerX + outlineThickness,
-                centerY + outlineThickness
-
-        )
-        binding.debugModeOverlay.drawBoundingBox(
-                outline,
-                Color.RED,
-                cameraConfiguration.targetResolution
-        )
-    }
-
-    private fun drawFaceOutline(boundingBox: Rect, resolution: Size) {
-        binding.debugModeOverlay.drawBoundingBox(boundingBox, Color.GREEN, resolution)
-    }
-
-    private fun drawCroppedFaceOutline(boundingBox: Rect, resolution: Size) {
-        binding.debugModeOverlay.drawBoundingBox(boundingBox, Color.BLUE, resolution)
-    }
-
-    private fun clearOverlay() {
-        binding.debugModeOverlay.clearBoundingBox()
-        drawFaceCenterPoint()
-    }
 }
+

@@ -2,28 +2,11 @@
     <string name="app_name">FCM Demo</string>
 
     <!-- Main -->
-    <string name="yoti_fcm_demo_button_start">Start</string>
-    <string name="yoti_fcm_demo_button_start_debug_mode">Debug Mode</string>
     <string name="yoti_fcm_demo_button_auto">Automatic Capture</string>
     <string name="yoti_fcm_demo_button_manual">Manual Capture</string>
-    <string name="yoti_fcm_demo_button_debug">Debug Capture</string>
-    <string name="yoti_fcm_demo_config_debug_mode">Debug Mode</string>
-    <string name="yoti_fcm_demo_config_manual_capture_mode">Manual capture</string>
-    <string name="yoti_fcm_demo_config_angle">Require Valid Angle</string>
-    <string name="yoti_fcm_demo_config_open">Require eyes open</string>
-    <string name="yoti_fcm_demo_config_stability">Require stable face</string>
-    <string name="yoti_fcm_demo_config_luminosity">Require bright environment</string>
-    <string name="yoti_fcm_demo_config_require_landmark">Require landmarks</string>
-    <string name="yoti_fcm_demo_config_require_smile_score">Require Smile Score</string>
-    <string name="yoti_fcm_demo_config_use_back_camera">Use back camera</string>
-    <string name="yoti_fcm_demo_button_capture">Capture</string>
-    <string-array name="yoti_fcm_demo_config_image_quality_array">
-        <item>High Quality</item>
-        <item>Default Quality</item>
-        <item>Low Quality</item>
-    </string-array>
+    <string name="yoti_fcm_demo_button_debug">Debug</string>
 
-    <!-- Automatic capture -->
+    <!-- Manual capture -->
     <string name="yoti_fcm_demo_capture_manual_button">Capture</string>
 
     <!-- Permissions -->

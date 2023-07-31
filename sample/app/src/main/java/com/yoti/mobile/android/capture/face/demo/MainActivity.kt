@@ -4,24 +4,18 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.yoti.mobile.android.capture.face.demo.config.FACE_CAPTURE_ACTIVITY_CONFIGURATION_EXTRA
-import com.yoti.mobile.android.capture.face.demo.config.FaceCaptureActivityConfiguration
+import com.yoti.mobile.android.capture.face.demo.automatic.AutomaticFaceCaptureActivity
 import com.yoti.mobile.android.capture.face.demo.databinding.ActivityMainBinding
 import com.yoti.mobile.android.capture.face.demo.debug.DebugFaceCaptureActivity
-import com.yoti.mobile.android.capture.face.ui.models.face.ImageQuality
+import com.yoti.mobile.android.capture.face.demo.manual.ManualFaceCaptureActivity
 
-class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
-    private var imageQuality: ImageQuality? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,39 +27,18 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
 
         with(binding) {
-            debugMode.setOnCheckedChangeListener { _, isChecked ->
-                manualCaptureMode.isEnabled = !isChecked
-                manualCaptureMode.isChecked = !isChecked
+            startAutomaticFaceCaptureButton.setOnClickListener {
+                startActivity(Intent(this@MainActivity, AutomaticFaceCaptureActivity::class.java))
             }
-
-            startFaceCapture.setOnClickListener {
-                val activity = if (debugMode.isChecked) DebugFaceCaptureActivity::class.java else FaceCaptureActivity::class.java
-                startActivity(Intent(this@MainActivity, activity).apply {
-                    putExtra(
-                            FACE_CAPTURE_ACTIVITY_CONFIGURATION_EXTRA,
-                            getFaceCaptureActivityConfiguration()
-                    )
-                })
+            startManualFaceCaptureButton.setOnClickListener {
+                startActivity(Intent(this@MainActivity, ManualFaceCaptureActivity::class.java))
+            }
+            startDebugFaceCaptureButton.setOnClickListener {
+                startActivity(Intent(this@MainActivity, DebugFaceCaptureActivity::class.java))
             }
         }
 
-        populateImageQualitySpinner()
     }
-
-    private fun getFaceCaptureActivityConfiguration(): FaceCaptureActivityConfiguration = with(binding) {
-            FaceCaptureActivityConfiguration(
-                    isBackCamera = backCamera.isChecked,
-                    imageQuality = imageQuality ?: ImageQuality.default,
-                    isManualCapture = manualCaptureMode.isChecked,
-                    requireValidAngle = validAngle.isChecked,
-                    requireEyesOpen = eyesOpen.isChecked,
-                    requireBrightEnvironment = luminosity.isChecked,
-                    requireStableFrames = stability.isChecked,
-                    provideLandmarks = landmark.isChecked,
-                    provideSmileScore = smileScore.isChecked
-            )
-    }
-
     override fun onRequestPermissionsResult(
             requestCode: Int,
             permissions: Array<String>,
@@ -81,32 +54,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    private fun populateImageQualitySpinner() {
-        val spinner = binding.quality.also {
-            it.onItemSelectedListener = this
-        }
-
-        ArrayAdapter.createFromResource(
-                this,
-                R.array.yoti_fcm_demo_config_image_quality_array,
-                android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
-        }
-
-        spinner.setSelection(ImageQuality.MEDIUM.ordinal)
-    }
-
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
-    override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        imageQuality = ImageQuality.values()[position]
-    }
 }
 
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)

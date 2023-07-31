@@ -6,111 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Spinner
-        android:id="@+id/quality"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/valid_angle"/>
-
-    <CheckBox
-        android:id="@+id/valid_angle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/yoti_fcm_demo_config_angle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/eyes_open" />
-
-    <CheckBox
-        android:id="@+id/eyes_open"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/yoti_fcm_demo_config_open"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/stability" />
-
-    <CheckBox
-        android:id="@+id/stability"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/yoti_fcm_demo_config_stability"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/luminosity" />
-
-    <CheckBox
-        android:id="@+id/luminosity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/yoti_fcm_demo_config_luminosity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/landmark" />
-
-    <CheckBox
-        android:id="@+id/landmark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/yoti_fcm_demo_config_require_landmark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/smile_score" />
-
-    <CheckBox
-        android:id="@+id/smile_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/yoti_fcm_demo_config_require_smile_score"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/back_camera"/>
-
-    <CheckBox
-        android:id="@+id/back_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/yoti_fcm_demo_config_use_back_camera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/manual_capture_mode"
-        android:layout_marginBottom="60dp"/>
-
-    <CheckBox
-        android:id="@+id/manual_capture_mode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:text="@string/yoti_fcm_demo_config_manual_capture_mode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/debug_mode" />
-
-    <CheckBox
-        android:id="@+id/debug_mode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:text="@string/yoti_fcm_demo_config_debug_mode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/start_face_capture" />
-
-    <Button
-        android:id="@+id/start_face_capture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/yoti_fcm_demo_button_start"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="40dp" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/start_automatic_face_capture_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yoti_fcm_demo_button_auto"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/start_manual_face_capture_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yoti_fcm_demo_button_manual"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/start_debug_face_capture_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yoti_fcm_demo_button_debug"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
