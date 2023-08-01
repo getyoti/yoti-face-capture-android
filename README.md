@@ -186,7 +186,7 @@ If the cropping of the face did not meet the requirements then the Invalid Face 
 ##### Error States
 
 The error states and validation states are in a specific order. For example, the FaceTooSmall check will be performed before the FaceNotCentered check. As such here are the states that can be returned in order of the checks that are done:
-- AnalysisError
+- AnalysisError: this could happen if the device is not compatible with the SDK and the capture analysis cannot be performed. We recommend you to fallback to manual capture mode (check sample app) if this error happens, do the user can do a manual capture.
 - NoFaceDetected
 - MultipleFacesDetected
 - FaceTooSmall
@@ -207,7 +207,10 @@ faceCapture.stopCamera()
 This is only required if it is part of your camera flow. Not required in response of lifecycle changes.
 
 ### Implementation sample
-You can find a sample App [here](https://github.com/getyoti/yoti-face-capture-android/sample) 
+You can find a sample App [here](https://github.com/getyoti/yoti-face-capture-android/sample). It is divided in three different use cases:
+- Automatic capture: capture is done automatically when a valid frame is detected.
+- Manual capture: capture is done by the user with a button which is visible only when a valid frame is detected. 
+- Debug mode: this mode could help you to define the Face Center parameter for your UI.
 
 ### Support
 If you have any other questions please do not hesitate to contact [clientsupport@yoti.com](clientsupport@yoti.com)
