@@ -207,7 +207,7 @@ faceCapture.stopCamera()
 This is only required if it is part of your camera flow. Not required in response of lifecycle changes.
 
 ### Implementation sample
-You can find a sample App [here](https://github.com/getyoti/yoti-face-capture-android/sample). It is divided in three different use cases:
+You can find a sample App [here](https://github.com/getyoti/yoti-face-capture-android/tree/main/sample). It is divided in three different use cases:
 - Automatic capture: capture is done automatically when a valid frame is detected.
 - Manual capture: capture is done by the user with a button which is visible only when a valid frame is detected. 
 - Debug mode: this mode could help you to define the Face Center parameter for your UI.
