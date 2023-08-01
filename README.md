@@ -1,8 +1,8 @@
 # yoti-face-capture-android
 
-yoti-face-capture-android provides a simplified way of capturing a face. It performs face detection from the front facing camera, analyses those frames and produces an optimised cropped image of the captured face.
+yoti-face-capture-android provides a simplified way of capturing a face. It performs face detection from the front facing or back camera, analyses those frames and produces an optimised cropped image of the captured face.
 
-This library leverage [Google ML Kit](https://firebase.google.com/docs/ml-kit/detect-faces) to perform the face detection.
+This library leverages on [Google ML Kit](https://firebase.google.com/docs/ml-kit/detect-faces) to perform face detection.
 
 ## Requirements
 - Android 21+
@@ -11,11 +11,11 @@ This library leverage [Google ML Kit](https://firebase.google.com/docs/ml-kit/de
 
 In your `gradle.properties` add one of the following dependency
 ```
-implementation 'com.yoti.mobile.android:face-capture-bundled:4.1.2'
+implementation 'com.yoti.mobile.android:face-capture-bundled:4.2.0'
 ```
 
 ```
-implementation 'com.yoti.mobile.android:face-capture-unbundled:4.1.2'
+implementation 'com.yoti.mobile.android:face-capture-unbundled:4.2.0'
 ```
 
 #### Bundled VS Unbundled
@@ -24,7 +24,7 @@ We offer two options to add this library to your app, bundled and unbundled.
 
 The bundled version embeds a 16Mb AI model for face detection with about 23.1Mb total SDK size.
 
-The unbundled version which has an estimated SDK size of 2.4Mb, will manage the download of the AI model via Google Play Services the first time you start using the AI model. Additionally you can add the following metadata to your `manifest.xml` to get the model downloaded as soon as the app is installed.
+The unbundled version which has an estimated SDK size of 2.4Mb, will manage the download of the AI model via Google Play Services the first time you start using the AI model. It is recommended to add the following metadata to your `manifest.xml` to get the model downloaded as soon as the app is installed.
 ```
 <application ...>
   ...
@@ -82,9 +82,21 @@ val configuration = FaceCaptureConfiguration(
 ```
 
 #### Face center
-The face center is a `PointF` representing the expected position of the center of the captured face.
+The face center is a `PointF` representing the expected position of the center of the user's face inside the image captured. In the samples below, it is represented by the intersection of the red and blue lines in the sample images.
 If the actual face center is not near this point it will not be considered a valid face.
-This parameter is a percentage value (x, y). E.g.: (0,0) - top left; (0.5, 0.5) - center of the screen; (1,1) - bottom right;
+
+- In this sample we set as faceCenter a point which has to match with where the face silhouette is inside the `FaceCapture` view. This is the place where the user's face will be. In this case, the faceCenter is set to `PointF(.5F, .45F)`, which means, a 50% of the horizontal axis and 45% of the vertical one.
+
+<p align="center">
+<img width="30%" src="https://github.com/getyoti/yoti-face-capture-android/assets/33830959/f5979597-2fc5-4dd1-9533-20c2b24bc8b2">
+</p>
+
+- In this other sample, we have a face silhouette which is closer to the top of the `FaceCapture` view, so we should move the vertical axis point towards the upper part, so in this case the FaceCenter configuration is set to `PointF(.5F, .35F)`:
+
+<p align="center">
+<img width="30%" src="https://github.com/getyoti/yoti-face-capture-android/assets/33830959/1bd0cd68-41aa-40c1-8e1a-2c33110d153c">
+</p>
+
 
 #### Image Quality
 This is the image quality of the cropped image after it has been compressed and converted to JPEG. It can be either `ImageQuality.LOW` or `ImageQuality.MEDIUM` or `ImageQuality.HIGH`
@@ -93,7 +105,7 @@ This is the image quality of the cropped image after it has been compressed and 
 This boolean if true, will require the picture to be taken with a tilt angle no bigger than 30 degrees.
 When this requirement is not met `FaceNotStraight` error is returned.
 
-### Require Eye Open
+### Require Eyes Open
 This boolean if true it will require the eyes to be opened.
 When this requirement is not met `EyesClosed` error is returned.
 
@@ -101,16 +113,16 @@ When this requirement is not met `EyesClosed` error is returned.
 If true it will require the environment luminosity to be above a pre-determined threshold.
 When this requirement is not met `EnvironmentTooDark` error is returned.
 
-### Required Stable Frames
+### Require Stable Frames
 This integer will require "n" number of frames to be as similar as possible in terms of width/hight and x/y position.
 The purpose of this is to avoid capturing blurry images.
 When this requirement is not met `FaceNotStable` error is returned.
 
 ### Provide Landmarks
-If set to true, SDK will return facial landmark points for both original and cropped images on  valid face. These set of points are nullable
+If set to true, SDK will return facial landmark points for both original and cropped images on a valid face. These set of points are nullable.
 
 ### Provide Smile Score
-If set to true, SDK will return smile score on valid face. These score is a nullable value
+If set to true, SDK will return smile score on a valid face. This score is a nullable value.
 
 ### 3. Retreive your view
 ```
@@ -174,7 +186,7 @@ If the cropping of the face did not meet the requirements then the Invalid Face 
 ##### Error States
 
 The error states and validation states are in a specific order. For example, the FaceTooSmall check will be performed before the FaceNotCentered check. As such here are the states that can be returned in order of the checks that are done:
-- AnalysisError
+- AnalysisError: this could happen if the device is not compatible with the SDK and the capture analysis cannot be performed. We recommend you to fallback to manual capture mode (check sample app) if this error happens, do the user can do a manual capture.
 - NoFaceDetected
 - MultipleFacesDetected
 - FaceTooSmall
@@ -193,6 +205,12 @@ faceCapture.stopAnalysing()
 faceCapture.stopCamera()
 ```
 This is only required if it is part of your camera flow. Not required in response of lifecycle changes.
+
+### Implementation sample
+You can find a sample App [here](https://github.com/getyoti/yoti-face-capture-android/tree/main/sample). It is divided in three different use cases:
+- Automatic capture: capture is done automatically when a valid frame is detected.
+- Manual capture: capture is done by the user with a button which is visible only when a valid frame is detected. 
+- Debug mode: this mode could help you to define the Face Center parameter for your UI.
 
 ### Support
 If you have any other questions please do not hesitate to contact us here: https://support.yoti.com
