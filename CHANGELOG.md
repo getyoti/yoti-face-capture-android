@@ -1,4 +1,7 @@
 # ChangeLog
+## Version 4.3.0
+Changed: Update FCM dependency to version 4.3.0
+
 ## Version 4.2.1
 Changed: Update to kotlin 1.6. Remove requirement for jetifier in consuming apps.
 
