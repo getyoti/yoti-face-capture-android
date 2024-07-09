@@ -1,4 +1,7 @@
 # ChangeLog
+## Version 4.4.0
+Changed: Update FCM dependency to version 4.4.0
+
 ## Version 4.3.0
 Changed: Update FCM dependency to version 4.3.0
 

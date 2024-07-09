@@ -11,11 +11,11 @@ This library leverages on [Google ML Kit](https://firebase.google.com/docs/ml-ki
 
 In your `gradle.properties` add one of the following dependency
 ```
-implementation 'com.yoti.mobile.android:face-capture-bundled:4.3.0'
+implementation 'com.yoti.mobile.android:face-capture-bundled:4.4.0'
 ```
 
 ```
-implementation 'com.yoti.mobile.android:face-capture-unbundled:4.3.0'
+implementation 'com.yoti.mobile.android:face-capture-unbundled:4.4.0'
 ```
 
 #### Bundled VS Unbundled
