@@ -1,12 +1,13 @@
 # ChangeLog
 ## Version 4.4.1
-Changed: Update FCM dependency to version 4.4.1
+Fixed: Issue when publishing the FCM library to Maven
 
 ## Version 4.4.0
-Changed: Update FCM dependency to version 4.4.0
+Changed: Upgrade CameraX libraries to version 1.2.3
 
 ## Version 4.3.0
-Changed: Update FCM dependency to version 4.3.0
+Changed: Updated com.google.mlkit:face-detection to version 16.1.5
+Updated com.google.android.gms:play-services-mlkit-face-detection to version 17.1.0
 
 ## Version 4.2.1
 Changed: Update to kotlin 1.6. Remove requirement for jetifier in consuming apps.
