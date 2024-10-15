@@ -15,6 +15,7 @@
     <!-- Camera errors -->
     <string name="yoti_fcm_demo_camera_error_illegal_state">Illegal state</string>
     <string name="yoti_fcm_demo_camera_error_unable_to_resolve">Camera error</string>
+    <string name="yoti_fcm_demo_camera_facing_camera_swapped">Camera Swapped</string>
     <string name="yoti_fcm_demo_camera_error_unknown">Error</string>
 
     <!-- Results -->

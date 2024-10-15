@@ -13,6 +13,7 @@ import com.yoti.mobile.android.capture.face.ui.models.camera.CameraError
 import com.yoti.mobile.android.capture.face.ui.models.camera.CameraError.IllegalState
 import com.yoti.mobile.android.capture.face.ui.models.camera.CameraError.UnableToResolveCamera
 import com.yoti.mobile.android.capture.face.ui.models.camera.CameraState
+import com.yoti.mobile.android.capture.face.ui.models.camera.CameraState.CameraFacingSwapped
 import com.yoti.mobile.android.capture.face.ui.models.camera.CameraState.CameraInitializationError
 import com.yoti.mobile.android.capture.face.ui.models.camera.CameraState.MissingPermissions
 import com.yoti.mobile.android.capture.face.ui.models.face.FaceCaptureInvalid
@@ -111,6 +112,7 @@ class AutomaticFaceCaptureActivity : AppCompatActivity() {
         when (state) {
             is CameraInitializationError -> logState(handleCameraInitError(state.cause))
             is MissingPermissions -> logState(R.string.yoti_fcm_demo_camera_error_permissions)
+            is CameraFacingSwapped -> logState(R.string.yoti_fcm_demo_camera_facing_camera_swapped)
             else -> {}
         }
     }
