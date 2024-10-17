@@ -1,4 +1,9 @@
 # ChangeLog
+## Version 4.5.0
+Changed: New `CameraState`: `CameraFacingSwapped`
+
+New `CameraFacingSwapped` is sent by the SDK when the configured facing camera is not available and the SDK has swapped automatically to the other facing camera (if available) 
+
 ## Version 4.4.1
 Fixed: Issue when publishing the FCM library to Maven
 

@@ -11,11 +11,11 @@ This library leverages on [Google ML Kit](https://firebase.google.com/docs/ml-ki
 
 In your `gradle.properties` add one of the following dependency
 ```
-implementation 'com.yoti.mobile.android:face-capture-bundled:4.4.1'
+implementation 'com.yoti.mobile.android:face-capture-bundled:4.5.0'
 ```
 
 ```
-implementation 'com.yoti.mobile.android:face-capture-unbundled:4.4.1'
+implementation 'com.yoti.mobile.android:face-capture-unbundled:4.5.0'
 ```
 
 #### Bundled VS Unbundled
@@ -147,11 +147,13 @@ faceCaputure.startCamera(this)
 #### Camera States
 
 There are a few states that can be returned to allow the integrator to know what the current state of the Face Capture is. These are:
-- CameraReady - The Face Capture has connected to the camera and the preview is available, but no analyzing is happening
+- CameraReady - Face Capture has connected to the camera and the preview is available, but no analyzing is happening yet.
 - CameraStopped - The camera has stopped and no analyzing is happening.
 - Analyzing - The camera is ready and the Face Capture is analyzing frames to detect faces.
-- CameraInitializationError - There was an error initialzing the camera.
-- MissingPermissions - The Face Capture does not have sufficient permissions to caccess the camera.
+- CameraInitializationError - There was an error initializing the camera and it is not possible to swap to other facing camera.
+- MissingPermissions - Face Capture does not have permissions to caccess the camera.
+- CameraFacingSwapped - Configured facing camera is not available and the SDK has swappped automatically to the other facing camera (if available)  
+
 
 The following CameraErrors can be returned when the state is CameraInitializationError
 - IllegalState
