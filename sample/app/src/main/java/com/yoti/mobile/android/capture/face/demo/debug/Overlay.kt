@@ -40,11 +40,11 @@ class Overlay(context: Context, attrs: AttributeSet? = null) : View(context, att
         invalidate()
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas?.drawColor(TRANSPARENT, PorterDuff.Mode.CLEAR)
+        canvas.drawColor(TRANSPARENT, PorterDuff.Mode.CLEAR)
         outlines.forEach {
-            canvas?.drawRect(scaleBoundingBox(it.boundingBox, it.resolution), it.paint)
+            canvas.drawRect(scaleBoundingBox(it.boundingBox, it.resolution), it.paint)
         }
     }
 

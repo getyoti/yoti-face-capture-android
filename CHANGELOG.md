@@ -1,4 +1,19 @@
 # ChangeLog
+## Version 4.7.0
+### Added
+**Self-checkout mode**:
+This new feature matches with `self-checkout` EP behaviour and should be activated when FCM is used in environments where it is common to have people around while the capture is on going, such a self-checkout point in a supermarket.
+It can be activated by setting `FaceCaptureConfiguration::isSelfCheckOutMode` to true.
+- When it is `true`, if several faces are detected and if there is **only one** valid, FCM will return `ValidFace`. 
+If several faces are detected and none of them are valid or there are more than one valid faces, FCM will continue returning `MultipleFacesDetected`.
+- If it is set to `false`, whenever FCM detects more than one face, FCM will return `MultipleFacesDetected`
+**By default it is set to false.**
+
+## Version 4.6.0
+### Added
+- Ability to select external camera: set `CameraFacing.EXTERNAL` in `CameraConfiguration`
+- Ability to customise the Zoom level: set `zoomlevel` in `CameraConfiguration`
+
 ## Version 4.5.0
 Changed: New `CameraState`: `CameraFacingSwapped`
 

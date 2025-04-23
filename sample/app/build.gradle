@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'com.yoti.mobile.android.capture.face.demo'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.yoti.mobile.android.capture.face.demo"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -37,11 +37,11 @@ android {
 }
 
 dependencies {
-    implementation 'com.yoti.mobile.android:face-capture-unbundled:4.5.0'
+    implementation 'com.yoti.mobile.android:face-capture-unbundled:4.7.0'
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
-    implementation 'com.google.android.material:material:1.9.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.7'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
 }
