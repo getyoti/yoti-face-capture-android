@@ -1,6 +1,6 @@
 # yoti-face-capture-android
 
-yoti-face-capture-android provides a simplified way of capturing a face. It performs face detection from the front facing or back camera, analyses those frames and produces an optimised cropped image of the captured face.
+yoti-face-capture-android provides a simplified way of capturing a face. It performs face detection from the front facing, back or external camera, analyses those frames and produces an optimised cropped image of the captured face.
 
 This library leverages on [Google ML Kit](https://firebase.google.com/docs/ml-kit/detect-faces) to perform face detection.
 
@@ -11,11 +11,11 @@ This library leverages on [Google ML Kit](https://firebase.google.com/docs/ml-ki
 
 In your `gradle.properties` add one of the following dependency
 ```
-implementation 'com.yoti.mobile.android:face-capture-bundled:4.5.0'
+implementation 'com.yoti.mobile.android:face-capture-bundled:4.7.0'
 ```
 
 ```
-implementation 'com.yoti.mobile.android:face-capture-unbundled:4.5.0'
+implementation 'com.yoti.mobile.android:face-capture-unbundled:4.7.0'
 ```
 
 #### Bundled VS Unbundled
@@ -76,7 +76,8 @@ val configuration = FaceCaptureConfiguration(
                         requireBrightEnvironment = true,
                         requiredStableFrames = 3,
                         provideLandmarks = true,
-                        provideSmileScore = true
+                        provideSmileScore = true,
+                        isSelfCheckOutMode = false
                     )
 
 ```
@@ -124,6 +125,10 @@ If set to true, SDK will return facial landmark points for both original and cro
 ### Provide Smile Score
 If set to true, SDK will return smile score on a valid face. This score is a nullable value.
 
+### Self-checkout mode
+To be set to true when `self-checkout` endpoint is used so FCM SDK matches with the endpoint behaviour. This setup should be used in environments where it is common to have people around while the capture is on going, such a self-checkout point in a supermarket.
+If value is not set by default it is set to false.
+
 ### 3. Retreive your view
 ```
 val faceCapture = findViewById<FaceCapture>(R.id.faceCapture)
@@ -134,15 +139,16 @@ val faceCapture = findViewById<FaceCapture>(R.id.faceCapture)
 There are two ways to start the camera:
 
 ```
-faceCapture.startCamera(this, ::onCameraState)
+faceCapture.startCamera(this, ::onCameraState, cameraConfiguration)
 ```
 
 Or you could also do:
 ```
 faceCapture.cameraState.observe(this, ::onCameraState)
-faceCaputure.startCamera(this)
+faceCapture.startCamera(this, cameraConfiguration = cameraConfiguration)
 ```
 
+In `cameraConfiguration` parameter, we can set the camera facing and the zoom level we want to apply. By default, it is set to FRONT and we apply the default associated zoom level to each camera facing type, so **we do recommend to not to set a custom zoom level** unless you're using EXTERNAL facing.
 
 #### Camera States
 
