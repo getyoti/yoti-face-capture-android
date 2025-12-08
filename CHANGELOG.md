@@ -1,4 +1,9 @@
 # ChangeLog
+
+## Version 4.8.1
+### Updated
+16K page size compatibility
+
 ## Version 4.7.0
 ### Added
 **Self-checkout mode**:
