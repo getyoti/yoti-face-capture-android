@@ -1,0 +1,69 @@
+# === Build output ===
+/build/
+/**/build/
+
+# === IDE files (Android Studio/IntelliJ) ===
+/.idea/
+/*.iml
+/.gradle/
+/.cxx/
+
+# === Gradle-related files ===
+/gradlew
+/gradlew.bat
+
+# === Android-specific generated files ===
+**/BuildConfig.java
+**/BuildConfig.kt
+**/R.java
+**/R.kt
+**/Manifest.java
+**/Manifest.kt
+**/Generated*.java
+**/Generated*.kt
+
+# === Jetpack Hilt / Dagger ===
+**/*_Factory.java
+**/*_Factory.kt
+**/*_MembersInjector.java
+**/*_HiltModules.java
+**/*_HiltModules.kt
+**/*_Provide*.java
+**/*_Provide*.kt
+
+# === Jetpack DataBinding / ViewBinding ===
+**/*Binding.java
+**/*Binding.kt
+**/databinding/
+**/viewbinding/
+
+# === Jetpack Navigation ===
+**/*Directions.java
+**/*Directions.kt
+**/*NavGraphDirections.java
+**/*NavGraphDirections.kt
+
+# === Room (or other annotation processors) ===
+**/*_Impl.java
+**/*_Impl.kt
+
+# === Kotlin-specific metadata ===
+**/*.kotlin_metadata
+**/*.kotlin_builtins
+
+# === Java-specific ===
+**/*.class
+
+# === Compiled binaries ===
+**/*.apk
+**/*.aar
+**/*.dex
+**/*.jar
+**/*.so
+
+# === Local configuration ===
+/local.properties
+
+# === MacOS junk ===
+.DS_Store
+
